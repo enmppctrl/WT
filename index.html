@@ -56,11 +56,13 @@
       white-space: nowrap;
     }
     .brand img { width: 145px; height: 34px; object-fit: contain; object-position: left center; }
-    .topnav { display: flex; gap: 6px; align-items: center; }
+    .topnav { display: flex; gap: 6px; align-items: center; max-width: calc(100% - 180px); overflow-x: auto; scrollbar-width: none; }
+    .topnav::-webkit-scrollbar { display: none; }
     .topnav a {
       padding: 8px 12px;
       color: rgba(48,58,79,.78);
-      font-size: 12px;
+      font-size: 11px;
+      white-space: nowrap;
       text-decoration: none;
       border-radius: 999px;
       transition: .2s ease;
@@ -146,9 +148,6 @@
       pointer-events: none;
     }
     .hero-visual { position: absolute; right: clamp(24px, 6vw, 96px); bottom: 54px; z-index: 3; min-height: 0; }
-    .hero-photo {
-      display: none;
-    }
     .hero-shield {
       position: absolute;
       right: -2px;
@@ -161,20 +160,6 @@
       border-radius: 12px;
       filter: drop-shadow(0 18px 22px rgba(48,58,79,.2));
     }
-    .pill-row { display: flex; flex-wrap: wrap; gap: 10px; }
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      min-height: 36px;
-      padding: 8px 13px;
-      color: var(--ink);
-      background: var(--blue-pale);
-      border: 1px solid rgba(101,146,168,.28);
-      border-radius: 999px;
-      font-size: 13px;
-    }
-    .dark .pill { color: var(--white); background: rgba(101,146,168,.18); border-color: rgba(185,213,223,.32); }
-    .hero .pill { color: var(--white); background: rgba(48,58,79,.48); border-color: rgba(185,213,223,.42); }
 
     .section-head { display: flex; justify-content: space-between; gap: 34px; align-items: end; margin-bottom: 40px; }
     .section-head > * { margin-bottom: 0; }
@@ -209,7 +194,7 @@
     .metric b { display: block; margin-bottom: 6px; color: var(--blue-light); font-size: clamp(28px, 3.5vw, 48px); letter-spacing: -.05em; }
     .metric span { display: block; color: rgba(255,255,255,.72); font-size: 13px; }
 
-    .route { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 34px; }
+    .route { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0; margin-top: 34px; }
     .route-step { position: relative; padding: 18px 18px 18px 0; }
     .route-step:not(:last-child)::after { content: ""; position: absolute; top: 34px; right: -2px; width: 24px; height: 2px; background: var(--blue-light); }
     .route-number { display: grid; place-items: center; width: 42px; height: 42px; margin-bottom: 18px; color: var(--white); background: var(--blue); border-radius: 50%; font-weight: 700; }
@@ -221,37 +206,36 @@
     .photo-card .photo-copy { padding: 22px 24px 28px; color: var(--white); }
     .photo-card .photo-copy p { margin-bottom: 0; color: rgba(255,255,255,.72); }
 
-    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 16px; }
+    .tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 30px 0 10px; }
     .tab {
-      padding: 10px 14px;
+      padding: 14px 18px;
       color: var(--ink);
       background: var(--white);
       border: 1px solid rgba(101,146,168,.28);
       border-radius: 999px;
       cursor: pointer;
       transition: .2s ease;
+      font-size: 17px;
+      box-shadow: 0 8px 20px rgba(48,58,79,.08);
     }
     .tab:hover, .tab.active { color: var(--white); background: var(--blue); border-color: var(--blue); }
     .role-panel { min-height: 210px; padding: 30px; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); }
     .role-panel .role-title { margin-bottom: 8px; color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
     .role-panel h3 { font-size: 30px; font-weight: 400; }
     .role-panel p { max-width: 850px; color: #617084; font-size: 18px; }
-    .role-panel .next { display: inline-flex; margin-top: 8px; padding: 7px 11px; color: var(--ink); background: var(--blue-pale); border-radius: 8px; font-size: 13px; }
+    .role-panel ul { max-width: 900px; margin: 0 0 12px; padding-left: 22px; color: #617084; font-size: 17px; }
+    .role-panel li { margin: 8px 0; }
+    .tabs-hint { margin: 0 0 22px; color: #718096; text-align: center; font-size: 13px; }
 
     .principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
     .principle { display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: start; padding: 24px 0; border-top: 1px solid rgba(255,255,255,.18); }
     .principle .num { display: grid; place-items: center; width: 40px; height: 40px; color: var(--blue-light); border: 1px solid var(--blue); border-radius: 50%; font-size: 12px; }
-    .principle h3 { margin-bottom: 4px; font-size: 19px; font-weight: 400; }
-    .principle p { margin: 0; color: rgba(255,255,255,.65); font-size: 14px; }
+    .principle h3 { margin-bottom: 6px; font-size: 25px; font-weight: 400; }
+    .principle p { margin: 0; color: rgba(255,255,255,.65); font-size: 18px; }
 
-    .scenario { padding: 28px; background: var(--white); border-radius: var(--radius); }
-    .scenario-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-    .scenario-button { padding: 11px 14px; color: var(--ink); background: var(--blue-pale); border: 1px solid transparent; border-radius: 10px; cursor: pointer; }
-    .scenario-button.active, .scenario-button:hover { border-color: var(--blue); }
-    .scenario-answer { min-height: 126px; padding: 20px; color: var(--ink); background: #f8faf9; border-left: 4px solid var(--blue); border-radius: 0 12px 12px 0; }
-    .scenario-answer b { display: block; margin-bottom: 6px; }
 
     .checklist { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 40px; padding: 28px; background: var(--white); border-radius: var(--radius); }
+    .checklist-title { margin: 34px 0 16px; color: var(--white); font-size: clamp(28px, 4vw, 48px); font-weight: 400; }
     .check { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; color: var(--ink); border-bottom: 1px solid #e2e9eb; cursor: pointer; }
     .check input { width: 18px; height: 18px; accent-color: var(--blue); }
     .check.done { color: #78929d; text-decoration: line-through; }
@@ -261,10 +245,6 @@
 
     .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; }
     .footer-note { max-width: 540px; color: rgba(255,255,255,.68); font-size: 14px; }
-    .footer-mark { display: flex; justify-content: flex-end; align-items: end; gap: 20px; }
-    .footer-mark img { width: 250px; height: 90px; padding: 8px 14px; object-fit: contain; background: var(--white); border-radius: 12px; }
-    .footer-mark .wordmark { color: var(--white); font-size: 24px; font-weight: 700; line-height: 1; }
-    .footer-mark .wordmark span { display: block; color: var(--blue-light); font-size: 15px; letter-spacing: .08em; }
 
     .section-intro { max-width: 760px; margin-bottom: 34px; color: #617084; font-size: 19px; }
     .dark .section-intro { color: rgba(255,255,255,.72); }
@@ -278,7 +258,7 @@
     .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
     .milestone { position: relative; padding: 20px; background: var(--white); border-radius: 16px; border-top: 4px solid var(--blue); }
     .milestone b { display: block; margin-bottom: 8px; color: var(--blue); font-size: 27px; letter-spacing: -.04em; }
-    .milestone p { margin-bottom: 0; color: #617084; font-size: 14px; }
+    .milestone p { margin-bottom: 0; color: #617084; font-size: 18px; }
     .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
     .service-card { display: flex; flex-direction: column; min-height: 390px; padding: 28px; color: var(--white); background: var(--ink); border-radius: var(--radius); box-shadow: 0 12px 36px rgba(48,58,79,.12); }
     .service-card:nth-child(2) { background: #5b7d8e; }
@@ -289,13 +269,13 @@
     .service-card ul { margin: 16px 0 22px; padding-left: 18px; color: rgba(255,255,255,.82); font-size: 14px; }
     .service-card li { margin: 8px 0; }
     .service-card .service-bottom { margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.2); color: var(--blue-light); font-size: 13px; }
-    .service-strip { margin-top: 18px; padding: 22px 26px; background: var(--blue-pale); border-radius: 18px; color: var(--ink); }
+    .service-strip { margin-top: 18px; padding: 22px 26px; background: var(--blue-pale); border-radius: 18px; color: var(--ink); font-size: 22px; line-height: 1.35; }
     .service-strip strong { color: var(--ink-dark); }
     .team-map { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
     .team-card { padding: 22px; background: var(--white); border-radius: 18px; border: 1px solid rgba(101,146,168,.15); }
-    .team-card .mini-label { margin-bottom: 12px; color: var(--blue); font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
-    .team-card h3 { font-size: 21px; font-weight: 400; }
-    .team-card p { margin-bottom: 0; color: #617084; font-size: 14px; }
+    .team-card .mini-label { margin-bottom: 12px; color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    .team-card h3 { font-size: 24px; font-weight: 400; }
+    .team-card p { margin-bottom: 0; color: #617084; font-size: 17px; }
     .trust-grid { display: grid; grid-template-columns: minmax(270px, .8fr) minmax(0, 1.2fr); gap: 22px; align-items: stretch; }
     .trust-photo { min-height: 440px; overflow: hidden; background: var(--ink); border-radius: var(--radius); }
     .trust-photo img { width: 100%; height: 100%; min-height: 440px; object-fit: cover; object-position: center top; filter: saturate(.82); }
@@ -304,7 +284,7 @@
     .trust-copy p { color: rgba(255,255,255,.74); }
     .trust-copy .quote { margin: 28px 0; padding: 20px 0; border-top: 1px solid rgba(255,255,255,.2); border-bottom: 1px solid rgba(255,255,255,.2); color: var(--blue-light); font-size: 20px; }
     .partner-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-    .partner { padding: 8px 12px; color: var(--ink); background: var(--white); border-radius: 999px; font-size: 13px; }
+    .partner { padding: 12px 16px; color: var(--ink); background: var(--white); border-radius: 999px; font-size: 18px; }
     .people-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
     .person-card { padding: 30px; color: var(--white); background: var(--ink); border-radius: var(--radius); }
     .person-card:nth-child(2) { background: #5b7d8e; }
@@ -323,6 +303,16 @@
     .day-card p { margin-bottom: 0; color: #617084; font-size: 14px; }
     .case-strip { display: grid; grid-template-columns: .7fr 1.3fr; gap: 20px; align-items: center; padding: 26px 30px; color: var(--white); background: var(--ink); border-radius: 18px 18px 42px 18px; }
     .case-strip strong { color: var(--blue-light); font-size: 22px; font-weight: 400; }
+    .culture-team-card { width: 100%; max-width: none; margin: 48px 0 0; text-align: left; }
+    .culture-team-card h3 { margin-bottom: 14px; }
+    .culture-caption { max-width: 850px; margin-bottom: 0; }
+    .culture-gallery { display: flex; gap: 14px; overflow-x: auto; margin-top: 26px; padding-bottom: 10px; scroll-snap-type: x mandatory; scrollbar-color: var(--blue) rgba(101,146,168,.16); }
+    .culture-gallery img { flex: 0 0 auto; width: auto; height: 350px; max-width: none; object-fit: cover; border-radius: 16px; scroll-snap-align: start; }
+    .final-section { background: var(--ink); }
+    .final-logo-bg { position: absolute; right: clamp(20px, 7vw, 110px); left: auto; top: 50%; width: min(34vw, 480px); max-height: 70%; object-fit: contain; transform: translateY(-50%); opacity: .28; filter: saturate(.78); }
+    .final-section .footer-grid { position: relative; z-index: 2; grid-template-columns: minmax(0, 1.35fr) minmax(200px, .65fr); }
+    .final-section .footer-grid > div:first-child { grid-column: 1; }
+    .final-section .footer-note { max-width: 680px; }
     .case-strip p { margin: 0; color: rgba(255,255,255,.74); }
 
     @media (max-width: 900px) {
@@ -340,9 +330,11 @@
       .route-step:not(:last-child)::after { top: 58px; right: auto; left: 20px; width: 2px; height: 24px; }
       .route-step h3, .route-step p { max-width: none; }
       .footer-grid { grid-template-columns: 1fr; }
-      .footer-mark { justify-content: flex-start; }
       .timeline, .service-grid, .team-map, .adaptation-grid { grid-template-columns: 1fr 1fr; }
       .trust-grid, .story-layout { grid-template-columns: 1fr; }
+      .final-logo-bg { right: 20px; left: auto; width: 260px; opacity: .18; }
+      .final-section .footer-grid { grid-template-columns: 1fr; }
+      .final-section .footer-grid > div:first-child { grid-column: auto; }
       .trust-photo, .trust-photo img { min-height: 360px; }
       .case-strip { grid-template-columns: 1fr; }
       .person-top { align-items: flex-start; }
@@ -363,6 +355,9 @@
       .timeline, .service-grid, .team-map, .people-grid, .adaptation-grid { grid-template-columns: 1fr; }
       .person-top { display: block; }
       .person-photo { margin-bottom: 18px; }
+      .culture-gallery img { height: 240px; }
+      .service-strip { font-size: 18px; }
+      .team-card p { font-size: 16px; }
     }
   </style>
 </head>
@@ -370,12 +365,16 @@
   <header class="topbar">
     <a class="brand" href="#start"><img src="assets/logo.webp" alt="Эксперт Новострой" /></a>
     <nav class="topnav" aria-label="Навигация">
-      <a href="#why">Смысл</a>
-      <a href="#work">Маршрут</a>
-      <a href="#team">Команда</a>
-      <a href="#trust">Доверие</a>
-      <a href="#role">Роль</a>
-      <a href="#first-week">Старт</a>
+      <a href="#why">01 · Смысл</a>
+      <a href="#proof">02 · Доказательства</a>
+      <a href="#position">03 · История и позиция</a>
+      <a href="#work">04 · Клиентский маршрут</a>
+      <a href="#team">05 · Команда</a>
+      <a href="#trust">06 · Доверие</a>
+      <a href="#culture">07 · Культура</a>
+      <a href="#people">08 · Люди</a>
+      <a href="#role">09 · Роль</a>
+      <a href="#first-week">10 · Адаптация</a>
     </nav>
   </header>
 
@@ -387,12 +386,7 @@
       <div class="hero-copy">
         <div class="eyebrow">Welcome-тренинг · 2026</div>
         <h1>Добро пожаловать в Эксперт Новострой.</h1>
-        <p class="lead tagline">Ты пришёл в компанию, которая помогает покупателю пройти путь от получения ключей до защиты своих интересов. За один день важно понять не каталог услуг, а смысл компании, её позицию и своё место в общем результате.</p>
-        <div class="pill-row">
-          <span class="pill">общая картина за 1 день</span>
-          <span class="pill">1 клиентский маршрут</span>
-          <span class="pill">практика — после смысла</span>
-        </div>
+        <p class="lead tagline">Ты пришёл в компанию, которая помогает покупателю квартиры пройти путь от получения ключей до защиты своих интересов.<br /><br />За один день важно понять смысл компании, её позицию и своё место в общем результате.</p>
       </div>
       <div class="hero-visual">
         <img class="hero-shield" src="assets/logo.webp" alt="Фирменный знак Эксперт Новострой" />
@@ -403,9 +397,9 @@
       <div class="section-head">
         <div>
           <div class="eyebrow">01 · Смысл</div>
-          <h2>Сначала — зачем мы существуем.</h2>
+          <h2>Зачем мы появились на рынке недвижимости</h2>
         </div>
-        <p>Миссия — точка, от которой начинается работа. Она объясняет, почему существует компания и какое обещание она даёт клиенту.</p>
+        <p>Миссия — точка, от которой начинается работа. Она объясняет для чего создана компания и какое обещание она даёт клиенту.</p>
       </div>
       <div class="grid grid-2">
         <div class="card">
@@ -424,7 +418,7 @@
       </div>
     </section>
 
-    <section class="section dark" data-section>
+    <section id="proof" class="section dark" data-section>
       <div class="section-head">
         <div>
           <div class="eyebrow">02 · Доказательства</div>
@@ -436,7 +430,7 @@
         <div class="metric"><b>40+</b><span>сотрудников в команде</span></div>
         <div class="metric"><b>500+</b><span>приёмок квартир в месяц</span></div>
         <div class="metric"><b>150+</b><span>юридических обращений в месяц</span></div>
-        <div class="metric"><b>2017</b><span>год основания компании</span></div>
+        <div class="metric"><b>9+ лет</b><span>успешного опыта на рынке</span></div>
       </div>
       <div class="case-strip" style="margin-top: 24px;"><strong>Устойчивость — тоже результат.</strong><p>Компания обновляется вместе с законами и рынком и продолжает работать там, где многие другие игроки исчезли.</p></div>
     </section>
@@ -445,38 +439,33 @@
       <div class="section-head">
         <div>
           <div class="eyebrow">03 · История и позиция</div>
-          <h2>Компания растёт вместе с задачами клиента.</h2>
+          <h2>Компания растёт вместе с запросами клиента.</h2>
         </div>
         <p>Сегодня рядом работают технические специалисты, эксперты, юристы, продажи и сервис. Так компания сопровождает клиента на разных этапах.</p>
       </div>
-      <div class="story-layout">
-        <article class="story-card">
-          <h3>От проверки квартиры к полному маршруту защиты</h3>
-          <p>Сначала компания помогала увидеть недостатки в новой квартире. Затем появилась строительная экспертиза, потом юридическое направление и полноценная работа с дальнейшим маршрутом клиента.</p>
-          <p>Сегодня «Эксперт Новострой» соединяет строительство, право, сервис и продажи в одной системе. Поэтому работа сотрудника влияет не на отдельную операцию, а на общий опыт клиента.</p>
-          <p class="quote">«Мы на стороне покупателя. Мы на стороне фактов».</p>
-        </article>
-        <article class="story-card dark-card">
-          <h3>Позиция компании</h3>
-          <p>Мы не обещаем клиенту то, чем не управляем. Мы помогаем разобраться в фактах, выбрать следующий шаг и пройти его профессионально.</p>
-          <p>Это важная часть бренда: спокойная уверенность вместо давления, доказательства вместо предположений, ясность вместо неопределённости.</p>
-        </article>
-      </div>
+      <div class="section-intro" style="margin: 42px 0 18px; font-size: 25px;">От проверки квартиры к полному маршруту защиты</div>
       <div class="timeline">
         <div class="milestone"><b>2017</b><p>Компания начиналась с небольшой команды и понятной задачи — защищать интересы покупателя новостройки.</p></div>
         <div class="milestone"><b>2019</b><p>В работу добавилась строительная и техническая экспертиза.</p></div>
         <div class="milestone"><b>2020–2021</b><p>Появились специалисты по приёмке, эксперты, юристы и адвокаты.</p></div>
         <div class="milestone"><b>Сегодня</b><p>40+ сотрудников, Москва и Московская область, приёмка и юридическое сопровождение.</p></div>
       </div>
+      <article class="story-card dark-card" style="margin-top: 28px;">
+        <h3>Позиция компании</h3>
+        <p>Мы не обещаем клиенту то, чем не управляем. Мы помогаем разобраться в фактах, выбрать следующий шаг и пройти его профессионально.</p>
+        <p>Это важная часть бренда: спокойная уверенность вместо давления, доказательства вместо предположений, ясность вместо неопределённости.</p>
+        <p>Сегодня «Эксперт Новострой» соединяет строительство, право, сервис и продажи в одной системе. Поэтому работа сотрудника влияет не на отдельную операцию, а на общий опыт клиента.</p>
+        <p class="quote">«Мы на стороне покупателя. Мы на стороне фактов».</p>
+      </article>
     </section>
 
     <section id="work" class="section" data-section>
       <div class="section-head">
         <div>
           <div class="eyebrow">04 · Как мы создаём результат</div>
-          <h2>Не каталог услуг. Один клиентский маршрут.</h2>
+          <h2>Клиентский маршрут.</h2>
         </div>
-        <p>Клиентский путь соединяет подразделения и превращает отдельные услуги в понятный результат.</p>
+        <p style="font-size:20px;">Путь клиента соединяет подразделения и превращает отдельные услуги в понятный результат.</p>
       </div>
       <div class="route">
         <div class="route-step"><div class="route-number">01</div><h3>Понять задачу</h3><p>Что случилось у клиента и какой результат ему нужен.</p></div>
@@ -484,32 +473,34 @@
         <div class="route-step"><div class="route-number">03</div><h3>Зафиксировать</h3><p>Факты, документы, договорённости и следующий шаг.</p></div>
         <div class="route-step"><div class="route-number">04</div><h3>Передать дальше</h3><p>Правильному специалисту, без потери контекста.</p></div>
         <div class="route-step"><div class="route-number">05</div><h3>Не оставить в тишине</h3><p>Дать клиенту статус, срок следующего контакта и понятный ответ.</p></div>
+        <div class="route-step"><div class="route-number">06</div><h3>Подготовить решение</h3><p>Собрать документы, определить дальнейший маршрут и согласовать его с клиентом.</p></div>
+        <div class="route-step"><div class="route-number">07</div><h3>Выдать результат</h3><p>Акт осмотра, экспертное заключение (смета), взыскание компенсации за неустойку/недостатки.</p></div>
       </div>
       <div class="grid grid-3" style="margin-top: 48px;">
-        <article class="photo-card"><img src="assets/office.webp" alt="Офис Эксперт Новострой" /><div class="photo-copy"><h3>Техническая экспертиза</h3><p>Проверяем доступное состояние объекта, фиксируем факты и помогаем понять следующий шаг.</p></div></article>
-        <article class="photo-card"><img src="assets/reviews.webp" alt="Отзывы клиентов" /><div class="photo-copy"><h3>Сервис и доверие</h3><p>Результат — это не только документ, но и ощущение клиента: «со мной всё понятно».</p></div></article>
-        <article class="photo-card"><img src="assets/team.webp" alt="Команда Эксперт Новострой" /><div class="photo-copy"><h3>Юридическая защита</h3><p>Если вопрос выходит за пределы осмотра, внутри компании есть продолжение маршрута.</p></div></article>
+        <article class="photo-card"><img src="assets/technical-expertise.webp" alt="Специалист проводит техническую экспертизу квартиры" /><div class="photo-copy"><h3>Техническая экспертиза</h3><p>Проверяем доступное состояние объекта, фиксируем факты и помогаем понять следующий шаг.</p></div></article>
+        <article class="photo-card"><img src="assets/reviews.webp" alt="Отзывы клиентов" /><div class="photo-copy"><h3>Сервис и доверие</h3><p>Результат — это не только документ, но и ощущение клиента: «МОЙ ВОПРОС РЕШЁН».</p></div></article>
+        <article class="photo-card"><img src="assets/legal-support.webp" alt="Команда юристов готовит документы для защиты клиента" /><div class="photo-copy"><h3>Юридическая защита</h3><p>Если вопрос выходит за пределы осмотра, внутри компании есть продолжение маршрута.</p></div></article>
       </div>
       <div id="services" class="service-grid" style="margin-top: 48px;">
         <article class="service-card">
           <div class="service-no">01 · Приёмка</div>
           <h3>Увидеть и зафиксировать</h3>
           <p>Специалист проверяет квартиру до подписания документов и помогает клиенту получить объективную картину состояния объекта.</p>
-          <ul><li>проверка по утверждённой методике;</li><li>фиксация замечаний и фактического состояния;</li><li>понятное объяснение результата.</li></ul>
-          <div class="service-bottom">Не обещаем отсутствие всех проблем. Помогаем их обнаружить и правильно зафиксировать.</div>
+          <ul><li>проверка по чек-листу до 195 параметров;</li><li>фиксация замечаний и фактического состояния;</li><li>документально фиксируем недостатки;</li><li>понятное объяснение результата.</li></ul>
+          <div class="service-bottom">Проблемы в квартирах случаются. Мы помогаем их обнаружить и правильно зафиксировать.</div>
         </article>
         <article class="service-card">
           <div class="service-no">02 · Экспертиза</div>
-          <h3>Разобраться в причине</h3>
-          <p>Когда вопрос сложнее обычной приёмки, технические специалисты исследуют проблему и формируют доказательную основу.</p>
-          <ul><li>анализ сложных технических ситуаций;</li><li>отделение наблюдения от вывода;</li><li>материалы для следующего решения.</li></ul>
-          <div class="service-bottom">Акт приёмки и экспертиза — разные документы и разные задачи.</div>
+          <h3>От списка недостатков — к цели защиты</h3>
+          <p>Приёмка показывает, что в квартире есть недостатки, и помогает застройщику их устранить. Если застройщик не приходит исправлять замечания, нужен следующий шаг — доказать размер нарушенных прав и подготовить требования к компенсации.</p>
+          <ul><li>разбираем, какие недостатки требуют дальнейшей защиты;</li><li>готовим экспертное заключение со сметой;</li><li>используем его для досудебного обращения и суда.</li></ul>
+          <div class="service-bottom">Экспертиза переводит список недостатков в конкретную цель — защиту нарушенных прав.</div>
         </article>
         <article class="service-card">
           <div class="service-no">03 · Юридическая поддержка</div>
           <h3>Защитить интересы</h3>
           <p>Юридическая команда помогает клиенту использовать факты и документы для предъявления требований в правовом поле.</p>
-          <ul><li>оценка документов и перспективы;</li><li>подготовка юридического маршрута;</li><li>сопровождение без обещаний исхода суда.</li></ul>
+          <ul><li>оценка документов и перспективы;</li><li>подготовка юридического маршрута;</li><li>сопровождение в суде;</li><li>получение результата решения суда.</li></ul>
           <div class="service-bottom">Точный результат зависит от доказательств, действий застройщика и правовой ситуации.</div>
         </article>
       </div>
@@ -522,19 +513,19 @@
           <div class="eyebrow">05 · Команда</div>
           <h2>Над одним результатом работают разные специалисты.</h2>
         </div>
-        <p>Компания работает как единая команда: каждый отдел отвечает за свою часть клиентского результата и передаёт задачу дальше без потери контекста.</p>
+        <p>Компания работает как единая команда: каждый отдел отвечает за свою часть клиентского результата и передаёт задачу дальше без потери контекста и качества.</p>
       </div>
       <div class="team-map">
         <article class="team-card"><div class="mini-label">Клиентский вход</div><h3>Продажи</h3><p>Понимают задачу клиента, помогают выбрать подходящий маршрут и передают контекст дальше.</p></article>
         <article class="team-card"><div class="mini-label">Технический результат</div><h3>Приёмка и экспертиза</h3><p>Находят, исследуют и фиксируют факты по объекту, объясняя сложное понятным языком.</p></article>
-        <article class="team-card"><div class="mini-label">Правовой результат</div><h3>Юридическое направление</h3><p>Работает с документами, требованиями и дальнейшей защитой интересов клиента.</p></article>
+        <article class="team-card"><div class="mini-label">Правовой результат</div><h3>Юридическое сопровождение</h3><p>Работает с документами, требованиями и дальнейшей защитой интересов клиента в суде.</p></article>
         <article class="team-card"><div class="mini-label">Репутация</div><h3>Маркетинг</h3><p>Показывает рынку ценность компании, используя только проверенные факты и реальные истории.</p></article>
         <article class="team-card"><div class="mini-label">Общий опыт</div><h3>Руководители и сервис</h3><p>Помогают сохранять статус, договорённости и качество взаимодействия на каждом этапе.</p></article>
-        <article class="team-card"><div class="mini-label">Старт сотрудника</div><h3>HR и наставник</h3><p>Помогают пройти обучение, разобраться в роли и начать работать в реальном процессе.</p></article>
+        <article class="team-card"><div class="mini-label">Старт сотрудника</div><h3>Менеджер по персоналу</h3><p>Помогают пройти адаптацию, разобраться в роли и начать работать в реальном процессе.</p></article>
       </div>
       <div class="story-layout" style="margin-top: 28px;">
-        <article class="story-card"><img src="assets/team.webp" alt="Команда Эксперт Новострой" style="width:100%; height:260px; object-fit:cover; border-radius:16px; margin-bottom:20px;" /><h3>Команда — это не фон</h3><p>Для клиента команда проявляется в том, насколько последовательно мы передаём информацию, соблюдаем договорённости и не заставляем человека повторять свою историю заново.</p></article>
-        <article class="story-card dark-card"><h3>К кому обращаться</h3><p>Если не знаешь ответ, это не повод угадывать. Сначала проверь актуальный источник, затем обратись к профильному специалисту или руководителю и сообщи клиенту следующий шаг.</p><p class="quote">Сильная компания не делает вид, что каждый знает всё. Она умеет быстро находить правильного человека.</p></article>
+        <article class="story-card"><img src="assets/team.webp" alt="Команда Эксперт Новострой" style="width:100%; height:260px; object-fit:cover; border-radius:16px; margin-bottom:20px;" /><h3>Команда — это наша общая ответственность.</h3><p>Для клиента команда проявляется в том, насколько последовательно и чётко мы передаём информацию, соблюдаем договорённости и не заставляем человека (клиента/сотрудника) повторять свою историю заново.</p></article>
+        <article class="story-card dark-card"><h3>К кому обращаться</h3><p>Если не знаешь ответ, это не повод угадывать. Сначала проверь есть ли ответ в базе знаний, затем обратись к профильному специалисту или руководителю и затем сообщи клиенту следующий шаг.</p><p class="quote">Сильная компания не делает вид, что каждый знает всё.<br /><br />Она умеет быстро находить правильного человека.</p></article>
       </div>
     </section>
 
@@ -542,9 +533,9 @@
       <div class="section-head">
         <div>
           <div class="eyebrow">06 · Доверие</div>
-          <h2>Доверие складывается из конкретных обращений.</h2>
+          <h2>Нам доверяют.</h2>
         </div>
-        <p>Компании доверяют частные клиенты, публичные люди, строительные компании, риелторы и частные юристы.</p>
+        <p>Компании доверяют частные клиенты, публичные люди, ремонтные компании, риелторы и частные юристы.</p>
       </div>
       <div class="trust-grid">
         <div class="trust-photo"><img src="assets/nikolay-drozdov.webp" alt="Николай Дроздов на консультации" /></div>
@@ -554,8 +545,8 @@
           <p>Этот факт показывает, что к компании обращаются люди с разным уровнем публичности и ответственности. Для них важны профессионализм, спокойное объяснение и конфиденциальность.</p>
           <div class="quote">Публичность клиента не заменяет качества работы. Она только усиливает требования к нему.</div>
           <div class="eyebrow" style="margin-top: 24px;">Партнёрская среда</div>
-          <p>Мы работаем с несколькими строительными компаниями, риелторами и частными юристами. Это расширяет профессиональную экосистему, в которой компания помогает клиенту находить правильный следующий шаг.</p>
-          <div class="partner-row"><span class="partner">строительные компании</span><span class="partner">риелторы</span><span class="partner">частные юристы</span></div>
+          <p>Мы работаем с несколькими ремонтными компаниями, риелторами и частными юристами. Это расширяет профессиональную экосистему, в которой компания помогает клиенту находить правильный следующий шаг.</p>
+          <div class="partner-row"><span class="partner">ремонтные компании</span><span class="partner">риелторы</span><span class="partner">частные юристы</span></div>
         </article>
       </div>
     </section>
@@ -564,7 +555,7 @@
       <div class="section-head">
         <div>
           <div class="eyebrow">07 · Культура</div>
-          <h2>Что здесь интересно делать каждый день.</h2>
+          <h2>Что помогает нам решать задачи каждый день</h2>
         </div>
         <p>Здесь соединяются сложные задачи, профессиональная работа и команда, с которой приятно быть рядом каждый день.</p>
       </div>
@@ -574,9 +565,18 @@
         <div class="principle"><div class="num">03</div><div><h3>Поддержка — это ясность</h3><p>Даже если ответа ещё нет, человек должен понимать статус, следующий шаг и ответственного.</p></div></div>
         <div class="principle"><div class="num">04</div><div><h3>Экспертность — это развитие</h3><p>Проверять, учиться, признавать ошибку и вовремя обращаться к профильному специалисту.</p></div></div>
       </div>
-      <div class="grid grid-2" style="margin-top: 48px;">
-        <article class="card"><img src="assets/workshop.webp" alt="Командная работа" style="width:100%; height:220px; object-fit:cover; border-radius:16px; margin-bottom:20px;" /><h3>Команда в работе и в жизни</h3><p class="muted">Совместные встречи, корпоративные события и уважение к вкладу каждого создают рабочую среду, в которой людям хочется оставаться.</p></article>
-      </div>
+      <article class="card culture-team-card">
+        <h3>Команда в работе и в жизни</h3>
+        <p class="muted culture-caption">Совместные встречи, корпоративные события и уважение к вкладу каждого создают рабочую среду, в которой людям хочется оставаться.</p>
+        <div class="culture-gallery">
+          <img src="assets/team-01.webp" alt="Команда на рабочей встрече" />
+          <img src="assets/team-02.webp" alt="Команда на корпоративном мероприятии" />
+          <img src="assets/team-03.webp" alt="Команда на встрече" />
+          <img src="assets/team-04.webp" alt="Команда на награждении" />
+          <img src="assets/team-05.webp" alt="Команда на общем мероприятии" />
+          <img src="assets/team-06.webp" alt="Команда на корпоративном вечере" />
+        </div>
+      </article>
     </section>
 
     <section id="people" class="section" data-section>
@@ -610,116 +610,96 @@
       <div class="section-head">
         <div>
           <div class="eyebrow">09 · Твоя роль</div>
-          <h2>Общий смысл один. Практика у каждого своя.</h2>
+          <h2>Общая цель одна.<br />Роль у каждого своя.</h2>
         </div>
-        <p>Общий смысл один, а первые задачи зависят от роли. Выбери направление и посмотри, с чего начинается работа.</p>
+        <p>Общая цель одна, а задачи каждого зависят от его роли.<br /><br />Выбери направление и посмотри, с чего начинается работа.</p>
       </div>
       <div class="tabs" role="tablist" aria-label="Роли">
         <button class="tab active" data-role="sales">Продажи</button>
-        <button class="tab" data-role="service">Сервис</button>
         <button class="tab" data-role="tech">Техническое направление</button>
-        <button class="tab" data-role="legal">Юридическое направление</button>
+        <button class="tab" data-role="legal">Юридическое сопровождение</button>
+        <button class="tab" data-role="support">Поддержка</button>
         <button class="tab" data-role="marketing">Маркетинг</button>
+        <button class="tab" data-role="people">Работа с персоналом</button>
       </div>
+      <div class="tabs-hint">Нажми на роль — содержание блока изменится</div>
       <div class="role-panel" id="role-panel">
         <div class="role-title">Что важно в начале</div>
-        <h3>Продажи: сначала понять задачу клиента.</h3>
-        <p>Не читать каталог услуг подряд. Выяснить ситуацию, выбрать один релевантный аргумент, назвать ограничение, зафиксировать договорённости в Bitrix24 и передать вопрос дальше, если он выходит за пределы компетенции.</p>
-        <span class="next">Первый навык: вести разговор от задачи клиента к следующему шагу.</span>
-      </div>
-    </section>
-
-    <section class="section" data-section>
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">10 · Как звучит бренд</div>
-          <h2>Не запрещаем. Даём безопасный способ действовать.</h2>
-        </div>
-        <p>В работе важны спокойный тон, точные формулировки и честные границы ответственности.</p>
-      </div>
-      <div class="grid grid-2">
-        <div class="scenario">
-          <h3>Попробуй ответить на ситуацию</h3>
-          <div class="scenario-buttons">
-            <button class="scenario-button active" data-scenario="price">«Почему так дорого?»</button>
-            <button class="scenario-button" data-scenario="promise">«Вы точно взыщете?»</button>
-            <button class="scenario-button" data-scenario="unknown">«Я не знаю, что ответить»</button>
-            <button class="scenario-button" data-scenario="early">«Дата приёмки ещё неизвестна»</button>
-          </div>
-          <div class="scenario-answer" id="scenario-answer"><b>Вместо спора о цене:</b> «Давайте сравним не только стоимость, но и состав проверки, оборудование, документы и поддержку. Я уточню условия именно по вашей ситуации».</div>
-        </div>
-        <div class="card">
-          <div class="kicker">4 шага</div>
-          <h3>Формула любого понятного ответа</h3>
-          <p class="muted">Подтвердить, что запрос получен → сообщить ответ или статус → назвать следующий шаг → дать контрольную точку.</p>
-          <div class="pill-row" style="margin-top: 22px;"><span class="pill">получил</span><span class="pill">проверяю</span><span class="pill">передаю</span><span class="pill">вернусь до …</span></div>
-        </div>
+        <h3>Продажи: от задачи клиента — к следующему шагу</h3>
+        <div class="role-content"><p>Наш главный навык — услышать потребность клиента и перевести её в конкретное решение.</p><ul><li>Выясняем реальную ситуацию.</li><li>Приводим сильные аргументы.</li><li>Честно обозначаем ограничения, если они есть.</li><li>Фиксируем договорённости в Bitrix24.</li><li>Вовремя передаём вопрос коллегам, если задача выходит за рамки нашей компетенции.</li></ul></div>
       </div>
     </section>
 
     <section id="first-week" class="section orange" data-section>
       <div class="section-head">
         <div>
-          <div class="eyebrow" style="color:#ffe0d0;">11 · После welcome</div>
-          <h2>После общей презентации начинается настоящая адаптация.</h2>
+          <div class="eyebrow" style="color:#ffe0d0;">10 · После welcome</div>
+          <h2>Сейчас начинается настоящая адаптация.</h2>
         </div>
         <p style="color:rgba(255,255,255,.82);">После презентации понятно, куда двигаться дальше, у кого получать поддержку и как постепенно войти в реальную работу.</p>
       </div>
       <div class="adaptation-grid">
         <article class="day-card"><div class="day">Первый день</div><h3>Понять компанию</h3><p>Миссия, позиция, направления, команда и человек, к которому можно обратиться с первым вопросом.</p></article>
-        <article class="day-card"><div class="day">Первая неделя</div><h3>Собрать базовую картину</h3><p>Видеообучение, знакомство с ролью, основными терминами, инструментами и правилами передачи задач.</p></article>
-        <article class="day-card"><div class="day">Первый месяц</div><h3>Войти в реальный бой</h3><p>Первые сделки и задачи под контролем руководителя. Ошибки разбираются через повторение и обратную связь.</p></article>
+        <article class="day-card"><div class="day">Первая неделя</div><h3>Собрать базовую картину</h3><p>Обучение на основе базы знаний, знакомство с ролью, основными терминами, инструментами, инструкциями и правилами.</p></article>
+        <article class="day-card"><div class="day">Первый месяц</div><h3>Выход на самостоятельные результаты</h3><p>Первые шаги в работе и задачи ты ведёшь вместе с наставником. Мы разбираем каждый сложный момент через повторение, обратную связь и открытый диалог.</p></article>
       </div>
+      <h3 class="checklist-title">Чек-лист твоих первых шагов</h3>
       <div class="checklist" id="checklist">
         <label class="check"><input type="checkbox" /> Познакомиться с руководителем и наставником.</label>
         <label class="check"><input type="checkbox" /> Получить доступы к Bitrix24 и рабочим чатам.</label>
         <label class="check"><input type="checkbox" /> Открыть карту базы знаний и найти раздел своей роли.</label>
         <label class="check"><input type="checkbox" /> Понять, кому передавать нестандартный вопрос.</label>
-        <label class="check"><input type="checkbox" /> Разобрать один клиентский кейс вместе с наставником.</label>
+        <label class="check"><input type="checkbox" /> Разобрать первую задачу роли вместе с наставником.</label>
         <label class="check"><input type="checkbox" /> Сделать первую задачу и получить обратную связь.</label>
       </div>
       <div class="progress-wrap"><div class="progress"><span id="progress-bar"></span></div><b id="progress-text">0 / 6</b></div>
     </section>
 
-    <section class="section dark" data-section>
+    <section class="section dark final-section" data-section>
+      <img class="final-logo-bg" src="assets/logo-round.webp" alt="" />
       <div class="footer-grid">
         <div>
           <div class="eyebrow">Финал</div>
-          <h2>Добро пожаловать в команду, которая помогает людям получить то, за что они заплатили.</h2>
+          <h2>Добро пожаловать в Эксперт Новострой, команду, которая помогает людям получить то, за что они заплатили.</h2>
           <p class="footer-note">За один день ты понял главное: зачем существует компания, как устроен клиентский маршрут, кто создаёт результат и с чего начинается твой собственный старт.</p>
         </div>
-        <div class="footer-mark"><img src="assets/logo.webp" alt="Эксперт Новострой" /></div>
       </div>
     </section>
   </main>
 
   <script>
     const roleData = {
-      sales: { title: 'Продажи: сначала понять задачу клиента.', text: 'Не читать каталог услуг подряд. Выяснить ситуацию, выбрать один релевантный аргумент, назвать ограничение, зафиксировать договорённости в Bitrix24 и передать вопрос дальше, если он выходит за пределы компетенции.', next: 'Первый навык: вести разговор от задачи клиента к следующему шагу.' },
-      service: { title: 'Сервис: не оставлять человека в неопределённости.', text: 'Подтвердить получение запроса, дать текущий статус, назвать следующий шаг и контрольную точку. Если ответа ещё нет, это не повод исчезать.', next: 'Первый навык: давать ясный статус даже без готового решения.' },
-      tech: { title: 'Техническое направление: фиксировать факт и ограничение.', text: 'Проводить проверку по методике, отделять наблюдение от вывода, честно обозначать недоступные элементы и передавать клиенту понятный результат.', next: 'Первый навык: объяснять техническое простыми словами.' },
-      legal: { title: 'Юридическое направление: работать с документами и перспективой.', text: 'Проверять факты, документы и правовой режим периода. Не обещать сумму, срок или исход суда. Нестандартные вопросы подтверждать через профильного руководителя.', next: 'Первый навык: видеть границу между консультацией и обещанием.' },
-      marketing: { title: 'Маркетинг: говорить ярко, но только подтверждённо.', text: 'Брать факты, офферы и формулировки из актуальных источников. Перед публикацией сверять claims, условия цены и ограничения, чтобы бренд обещал ровно то, что компания может выполнить.', next: 'Первый навык: превращать доказанный факт в понятный смысл для клиента.' }
+      sales: {
+        title: 'Продажи: от задачи клиента — к следующему шагу',
+        text: '<p>Наш главный навык — услышать потребность клиента и перевести её в конкретное решение.</p><ul><li>Выясняем реальную ситуацию.</li><li>Приводим сильные аргументы.</li><li>Честно обозначаем ограничения, если они есть.</li><li>Фиксируем договорённости в Bitrix24.</li><li>Вовремя передаём вопрос коллегам, если задача выходит за рамки нашей компетенции.</li></ul>'
+      },
+      tech: {
+        title: 'Техническая экспертиза: точность фактов и честные границы',
+        text: '<p>Мы никогда не придумываем дефекты ради драмы и не скрываем реальные проблемы. Наш главный навык — переводить сложные строительные термины, СНиПы и ГОСТы на понятный клиенту язык, помогая ему увидеть реальное состояние квартиры.</p><ul><li>Проводим проверку строго по чек-листу до 195 параметров и с профессиональным оборудованием.</li><li>Отделяем сухие наблюдения от экспертных выводов — фиксируем только то, что есть на самом деле.</li><li>Честно обозначаем недоступные для осмотра элементы, например скрытую проводку или заставленные углы.</li><li>Передаём клиенту понятный результат и готовое заключение, с которым можно уверенно идти к застройщику или в суд.</li></ul>'
+      },
+      legal: {
+        title: 'Юридическое сопровождение: работа с фактами и реальной перспективой',
+        text: '<p>Мы не даём пустых надежд ради красивых отчётов и не обещаем невозможного. Наш главный навык — видеть чёткую границу между профессиональной консультацией и гарантией результата, объективно оценивая перспективы каждого спора.</p><ul><li>Тщательно проверяем документы, факты и актуальную судебную практику по застройщикам.</li><li>Честно оцениваем риски дела, никогда не гарантируя клиенту стопроцентный исход суда, точные сроки или суммы выплат.</li><li>Открыто говорим о слабых местах в позиции, если они существуют, и ищем способы их усилить.</li><li>Обязательно подтверждаем нестандартные или сложные правовые кейсы у профильного руководителя перед тем, как выдать заключение.</li></ul>'
+      },
+      support: {
+        title: 'Поддержка клиента и ясность на каждом этапе по юр. вопросам',
+        text: '<p>Мы никогда не оставляем клиента в неопределённости. Наш главный навык — давать чёткий статус по задаче, даже если окончательного юридического решения ещё нет.</p><ul><li>Сразу подтверждаем, что запрос клиента принят в работу.</li><li>Информируем о текущем статусе дела или документа.</li><li>Называем понятный следующий шаг и обозначаем контрольную точку (дедлайн).</li><li>Связываем с профильным специалистом, компетентным по решению вопроса клиента.</li><li>Остаёмся на связи в назначенное время, даже если ситуация ещё в процессе решения.</li></ul>'
+      },
+      marketing: {
+        title: 'Маркетинг: транслировать ценность и реальную силу компании',
+        text: '<p>Мы создаём яркий, привлекательный и открытый образ бренда, который вызывает доверие. Наш главный навык — находить твёрдые, доказанные успехи компании и превращать их в понятные, цепляющие смыслы для каждого клиента.</p><ul><li>Подсвечиваем сильные стороны, реальные кейсы и профессионализм нашей команды.</li><li>Берём цифры, спецпредложения и условия только из актуальных и надёжных источников компании.</li><li>Заботимся о репутации бренда, создавая ожидания, которые компания гарантированно оправдает на практике.</li><li>Переводим сложные процессы — экспертизы, суды, законы — на язык пользы, помогая клиенту увидеть в нас надёжного партнёра.</li></ul>'
+      },
+      people: {
+        title: 'Работа с персоналом: создавать среду для роста и поддержки',
+        text: '<p>Мы заботимся о том, чтобы каждый сотрудник чувствовал себя уверенно, понимал свои задачи и развивался вместе с компанией. Наш главный навык — находить сильных людей, помогать им раскрыть свой потенциал и выстраивать понятные, честные правила игры в команде.</p><ul><li>Помогаем новичкам легко и быстро адаптироваться, окружая их заботой и понятными ориентирами с первого дня.</li><li>Создаём прозрачные условия для работы, где каждый знает свои зоны ответственности, цели и критерии успеха.</li><li>Внимательно слушаем команду, вовремя замечаем усталость или выгорание и помогаем найти решение до того, как появится проблема.</li><li>Развиваем культуру открытости и взаимного уважения, где ценится инициатива, а ошибки воспринимаются как опыт для роста.</li></ul>'
+      }
     };
     const rolePanel = document.getElementById('role-panel');
     document.querySelectorAll('[data-role]').forEach(btn => btn.addEventListener('click', () => {
       document.querySelectorAll('[data-role]').forEach(x => x.classList.remove('active'));
       btn.classList.add('active');
       const item = roleData[btn.dataset.role];
-      rolePanel.innerHTML = `<div class="role-title">Что важно в начале</div><h3>${item.title}</h3><p>${item.text}</p><span class="next">${item.next}</span>`;
-    }));
-
-    const scenarioData = {
-      price: '<b>Вместо спора о цене:</b> «Давайте сравним не только стоимость, но и состав проверки, оборудование, документы и поддержку. Я уточню условия именно по вашей ситуации».',
-      promise: '<b>Вместо гарантии внешнего результата:</b> «Мы оцениваем перспективу по документам и фактической ситуации. Точный результат зависит от доказательств, суда и действий застройщика».',
-      unknown: '<b>Вместо “я не знаю”:</b> «Проверю по актуальному источнику и вернусь с ответом. Если вопрос профильный, передам его специалисту и сообщу следующий шаг».',
-      early: '<b>Вместо давления:</b> «Даже без даты можно спокойно выбрать компанию и подготовить документы. Когда дата появится, останется проверить свободный слот». '
-    };
-    const scenarioAnswer = document.getElementById('scenario-answer');
-    document.querySelectorAll('[data-scenario]').forEach(btn => btn.addEventListener('click', () => {
-      document.querySelectorAll('[data-scenario]').forEach(x => x.classList.remove('active'));
-      btn.classList.add('active');
-      scenarioAnswer.innerHTML = scenarioData[btn.dataset.scenario];
+      rolePanel.innerHTML = `<div class="role-title">Что важно в начале</div><h3>${item.title}</h3><div class="role-content">${item.text}</div>`;
     }));
 
     const checks = [...document.querySelectorAll('.check input')];
