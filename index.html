@@ -40,7 +40,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 28px;
+      gap: 14px;
+      padding: 12px clamp(16px, 2vw, 28px);
       color: var(--ink-dark);
       background: rgba(255, 255, 255, .96);
       backdrop-filter: blur(10px);
@@ -55,13 +56,13 @@
       text-transform: uppercase;
       white-space: nowrap;
     }
-    .brand img { width: 145px; height: 34px; object-fit: contain; object-position: left center; }
-    .topnav { display: flex; gap: 6px; align-items: center; max-width: calc(100% - 180px); overflow-x: auto; scrollbar-width: none; }
+    .brand img { width: clamp(128px, 11vw, 145px); height: 34px; object-fit: contain; object-position: left center; }
+    .topnav { display: flex; flex: 1; justify-content: flex-end; gap: 2px; align-items: center; min-width: 0; max-width: calc(100% - 150px); overflow-x: auto; scrollbar-width: none; }
     .topnav::-webkit-scrollbar { display: none; }
     .topnav a {
-      padding: 8px 12px;
+      padding: 7px 8px;
       color: rgba(48,58,79,.78);
-      font-size: 11px;
+      font-size: clamp(9px, .78vw, 11px);
       white-space: nowrap;
       text-decoration: none;
       border-radius: 999px;
@@ -162,6 +163,7 @@
     }
 
     .section-head { display: flex; justify-content: space-between; gap: 34px; align-items: end; margin-bottom: 40px; }
+    .section-head > div { min-width: 0; }
     .section-head > * { margin-bottom: 0; }
     .section-head p { max-width: 480px; color: #6b7888; }
     .dark .section-head p { color: rgba(255,255,255,.68); }
@@ -171,6 +173,7 @@
     .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
     .card {
+      min-width: 0;
       padding: 28px;
       background: var(--white);
       border: 1px solid rgba(101,146,168,.15);
@@ -195,15 +198,15 @@
     .metric span { display: block; color: rgba(255,255,255,.72); font-size: 13px; }
 
     .route { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0; margin-top: 34px; }
-    .route-step { position: relative; padding: 18px 18px 18px 0; }
+    .route-step { position: relative; min-width: 0; padding: 18px 18px 18px 0; }
     .route-step:not(:last-child)::after { content: ""; position: absolute; top: 34px; right: -2px; width: 24px; height: 2px; background: var(--blue-light); }
     .route-number { display: grid; place-items: center; width: 42px; height: 42px; margin-bottom: 18px; color: var(--white); background: var(--blue); border-radius: 50%; font-weight: 700; }
-    .route-step h3 { max-width: 150px; }
-    .route-step p { max-width: 170px; color: #6b7888; font-size: 14px; }
+    .route-step h3 { min-height: 48px; max-width: 150px; font-size: 18px; }
+    .route-step p { max-width: 170px; margin-bottom: 0; color: #6b7888; font-size: 14px; }
 
-    .photo-card { min-height: 390px; padding: 0; overflow: hidden; background: var(--ink); border-radius: var(--radius); }
+    .photo-card { display: flex; flex-direction: column; min-width: 0; min-height: 390px; padding: 0; overflow: hidden; background: var(--ink); border-radius: var(--radius); }
     .photo-card img { width: 100%; height: 240px; object-fit: cover; filter: saturate(.86); }
-    .photo-card .photo-copy { padding: 22px 24px 28px; color: var(--white); }
+    .photo-card .photo-copy { flex: 1; padding: 22px 24px 28px; color: var(--white); }
     .photo-card .photo-copy p { margin-bottom: 0; color: rgba(255,255,255,.72); }
 
     .tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 30px 0 10px; }
@@ -219,7 +222,7 @@
       box-shadow: 0 8px 20px rgba(48,58,79,.08);
     }
     .tab:hover, .tab.active { color: var(--white); background: var(--blue); border-color: var(--blue); }
-    .role-panel { min-height: 210px; padding: 30px; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .role-panel { min-width: 0; min-height: 210px; padding: 30px; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); }
     .role-panel .role-title { margin-bottom: 8px; color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
     .role-panel h3 { font-size: 30px; font-weight: 400; }
     .role-panel p { max-width: 850px; color: #617084; font-size: 18px; }
@@ -249,44 +252,45 @@
     .section-intro { max-width: 760px; margin-bottom: 34px; color: #617084; font-size: 19px; }
     .dark .section-intro { color: rgba(255,255,255,.72); }
     .story-layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(300px, .95fr); gap: 22px; align-items: stretch; }
-    .story-card { padding: 30px; background: var(--white); border: 1px solid rgba(101,146,168,.15); border-radius: var(--radius); box-shadow: 0 12px 36px rgba(48,58,79,.06); }
+    .story-card { min-width: 0; padding: 30px; overflow-wrap: break-word; background: var(--white); border: 1px solid rgba(101,146,168,.15); border-radius: var(--radius); box-shadow: 0 12px 36px rgba(48,58,79,.06); }
     .story-card.dark-card { color: var(--white); background: var(--ink); border: 0; }
+    .story-card.guidance-card { display: flex; flex-direction: column; justify-content: center; }
     .story-card h3 { font-size: 28px; font-weight: 400; }
     .story-card p:last-child { margin-bottom: 0; }
     .story-card .quote { margin: 24px 0 0; padding-top: 18px; border-top: 1px solid rgba(101,146,168,.25); color: var(--ink); font-size: 19px; font-style: italic; }
     .story-card.dark-card .quote { color: var(--blue-light); border-top-color: rgba(185,213,223,.24); }
     .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
-    .milestone { position: relative; padding: 20px; background: var(--white); border-radius: 16px; border-top: 4px solid var(--blue); }
-    .milestone b { display: block; margin-bottom: 8px; color: var(--blue); font-size: 27px; letter-spacing: -.04em; }
+    .milestone { position: relative; min-width: 0; height: 100%; padding: 20px; background: var(--white); border-radius: 16px; border-top: 4px solid var(--blue); }
+    .milestone b { display: flex; align-items: center; min-height: 38px; margin-bottom: 8px; color: var(--blue); font-size: clamp(24px, 2vw, 27px); letter-spacing: -.04em; }
     .milestone p { margin-bottom: 0; color: #617084; font-size: 18px; }
-    .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .service-card { display: flex; flex-direction: column; min-height: 390px; padding: 28px; color: var(--white); background: var(--ink); border-radius: var(--radius); box-shadow: 0 12px 36px rgba(48,58,79,.12); }
+    .service-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .service-card { display: flex; flex-direction: column; min-width: 0; min-height: 390px; padding: 26px; overflow-wrap: break-word; color: var(--white); background: var(--ink); border-radius: var(--radius); box-shadow: 0 12px 36px rgba(48,58,79,.12); }
     .service-card:nth-child(2) { background: #5b7d8e; }
     .service-card:nth-child(3) { background: #3c465d; }
     .service-card .service-no { color: var(--blue-light); font-size: 13px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
-    .service-card h3 { margin-top: 28px; font-size: 30px; font-weight: 400; }
-    .service-card > p { color: rgba(255,255,255,.78); }
-    .service-card ul { margin: 16px 0 22px; padding-left: 18px; color: rgba(255,255,255,.82); font-size: 14px; }
+    .service-card h3 { min-height: 88px; margin-top: 24px; font-size: clamp(25px, 2vw, 28px); font-weight: 400; }
+    .service-card > p { color: rgba(255,255,255,.78); font-size: 15px; }
+    .service-card ul { margin: 14px 0 20px; padding-left: 18px; color: rgba(255,255,255,.82); font-size: 14px; }
     .service-card li { margin: 8px 0; }
     .service-card .service-bottom { margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.2); color: var(--blue-light); font-size: 13px; }
     .service-strip { margin-top: 18px; padding: 22px 26px; background: var(--blue-pale); border-radius: 18px; color: var(--ink); font-size: 22px; line-height: 1.35; }
     .service-strip strong { color: var(--ink-dark); }
     .team-map { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .team-card { padding: 22px; background: var(--white); border-radius: 18px; border: 1px solid rgba(101,146,168,.15); }
+    .team-card { min-width: 0; padding: 22px; overflow-wrap: break-word; background: var(--white); border-radius: 18px; border: 1px solid rgba(101,146,168,.15); }
     .team-card .mini-label { margin-bottom: 12px; color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
     .team-card h3 { font-size: 24px; font-weight: 400; }
     .team-card p { margin-bottom: 0; color: #617084; font-size: 17px; }
     .trust-grid { display: grid; grid-template-columns: minmax(270px, .8fr) minmax(0, 1.2fr); gap: 22px; align-items: stretch; }
-    .trust-photo { min-height: 440px; overflow: hidden; background: var(--ink); border-radius: var(--radius); }
+    .trust-photo { min-width: 0; min-height: 440px; overflow: hidden; background: var(--ink); border-radius: var(--radius); }
     .trust-photo img { width: 100%; height: 100%; min-height: 440px; object-fit: cover; object-position: center top; filter: saturate(.82); }
-    .trust-copy { padding: 32px; color: var(--white); background: var(--ink); border-radius: var(--radius); }
+    .trust-copy { min-width: 0; padding: 32px; overflow-wrap: break-word; color: var(--white); background: var(--ink); border-radius: var(--radius); }
     .trust-copy h3 { font-size: 32px; font-weight: 400; }
     .trust-copy p { color: rgba(255,255,255,.74); }
     .trust-copy .quote { margin: 28px 0; padding: 20px 0; border-top: 1px solid rgba(255,255,255,.2); border-bottom: 1px solid rgba(255,255,255,.2); color: var(--blue-light); font-size: 20px; }
     .partner-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
     .partner { padding: 12px 16px; color: var(--ink); background: var(--white); border-radius: 999px; font-size: 18px; }
     .people-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-    .person-card { padding: 30px; color: var(--white); background: var(--ink); border-radius: var(--radius); }
+    .person-card { min-width: 0; padding: 30px; overflow-wrap: break-word; color: var(--white); background: var(--ink); border-radius: var(--radius); }
     .person-card:nth-child(2) { background: #5b7d8e; }
     .person-card .person-role { color: var(--blue-light); font-size: 12px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
     .person-card h3 { margin: 18px 0 14px; font-size: 30px; font-weight: 400; }
@@ -296,11 +300,11 @@
     .person-photo { flex: 0 0 138px; width: 138px; height: 170px; object-fit: cover; object-position: center top; border-radius: 16px; background: rgba(255,255,255,.14); }
     .person-photo.transparent { object-fit: cover; object-position: center 12%; }
     .person-top .person-role { flex: 1; }
-    .adaptation-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
-    .day-card { min-height: 210px; padding: 24px; background: var(--white); border-radius: 18px; color: var(--ink); }
+    .adaptation-grid { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1fr) minmax(0, 1.35fr); gap: 16px; margin-bottom: 24px; }
+    .day-card { min-width: 0; min-height: 0; padding: 24px; overflow-wrap: break-word; background: var(--white); border-radius: 18px; color: var(--ink); }
     .day-card .day { margin-bottom: 14px; color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
     .day-card h3 { font-size: 23px; font-weight: 400; }
-    .day-card p { margin-bottom: 0; color: #617084; font-size: 14px; }
+    .day-card p { margin-bottom: 0; color: #617084; font-size: 15px; }
     .case-strip { display: grid; grid-template-columns: .7fr 1.3fr; gap: 20px; align-items: center; padding: 26px 30px; color: var(--white); background: var(--ink); border-radius: 18px 18px 42px 18px; }
     .case-strip strong { color: var(--blue-light); font-size: 22px; font-weight: 400; }
     .culture-team-card { width: 100%; max-width: none; margin: 48px 0 0; text-align: left; }
@@ -322,9 +326,11 @@
     .final-section .footer-note { max-width: 680px; }
     .case-strip p { margin: 0; color: rgba(255,255,255,.74); }
 
+    @media (max-width: 1100px) {
+      .topnav { display: none; }
+    }
     @media (max-width: 900px) {
       .topbar { padding: 12px 16px; }
-      .topnav { display: none; }
       .section { padding: 102px 22px 70px; }
       .hero-copy { top: 126px; left: 22px; right: 22px; }
       .hero-visual { right: 22px; bottom: 46px; }
@@ -335,9 +341,13 @@
       .route-step { padding: 0 0 0 62px; }
       .route-number { position: absolute; left: 0; top: 0; }
       .route-step:not(:last-child)::after { top: 58px; right: auto; left: 20px; width: 2px; height: 24px; }
-      .route-step h3, .route-step p { max-width: none; }
+      .route-step h3, .route-step p { min-height: 0; max-width: none; }
       .footer-grid { grid-template-columns: 1fr; }
-      .timeline, .service-grid, .team-map, .adaptation-grid { grid-template-columns: 1fr 1fr; }
+      .timeline, .service-grid, .team-map { grid-template-columns: 1fr 1fr; }
+      .service-grid .service-card:last-child,
+      #work > .grid-3 > :last-child { grid-column: 1 / -1; }
+      .adaptation-grid { grid-template-columns: 1fr 1fr; }
+      .adaptation-grid .day-card:last-child { grid-column: 1 / -1; }
       .trust-grid, .story-layout { grid-template-columns: 1fr; }
       .final-logo-bg { right: 20px; left: auto; width: 260px; opacity: .18; }
       .final-section .footer-grid { grid-template-columns: 1fr; }
@@ -345,6 +355,7 @@
       .trust-photo, .trust-photo img { min-height: 360px; }
       .case-strip { grid-template-columns: 1fr; }
       .person-top { align-items: flex-start; }
+      .service-card h3 { min-height: 0; }
     }
     @media (max-width: 600px) {
       h1 { font-size: 45px; }
@@ -359,9 +370,13 @@
       .hero-copy .tagline { font-size: 18px; }
       .hero-visual { right: 16px; bottom: 42px; }
       .hero-shield { width: 190px; height: 76px; }
-      .timeline, .service-grid, .team-map, .people-grid, .adaptation-grid { grid-template-columns: 1fr; }
+      .timeline, .service-grid, .team-map, .people-grid, .adaptation-grid { grid-template-columns: minmax(0, 1fr); }
+      .service-grid .service-card:last-child,
+      #work > .grid-3 > :last-child { grid-column: auto; }
+      .adaptation-grid .day-card:last-child { grid-column: auto; }
       .person-top { display: block; }
       .person-photo { margin-bottom: 18px; }
+      .person-card h3 { font-size: 26px; }
       .culture-gallery { padding-inline: 40px; }
       .culture-gallery img { height: 240px; }
       .service-strip { font-size: 18px; }
@@ -533,7 +548,7 @@
       </div>
       <div class="story-layout" style="margin-top: 28px;">
         <article class="story-card"><img src="assets/team.webp" alt="Команда Эксперт Новострой" style="width:100%; height:260px; object-fit:cover; border-radius:16px; margin-bottom:20px;" /><h3>Команда — это наша общая ответственность.</h3><p>Для клиента команда проявляется в том, насколько последовательно и чётко мы передаём информацию, соблюдаем договорённости и не заставляем человека (клиента/сотрудника) повторять свою историю заново.</p></article>
-        <article class="story-card dark-card"><h3>К кому обращаться</h3><p>Если не знаешь ответ, это не повод угадывать. Сначала проверь есть ли ответ в базе знаний, затем обратись к профильному специалисту или руководителю и затем сообщи клиенту следующий шаг.</p><p class="quote">Сильная компания не делает вид, что каждый знает всё.<br /><br />Она умеет быстро находить правильного человека.</p></article>
+        <article class="story-card dark-card guidance-card"><h3>К кому обращаться</h3><p>Если не знаешь ответ, это не повод угадывать. Сначала проверь есть ли ответ в базе знаний, затем обратись к профильному специалисту или руководителю и затем сообщи клиенту следующий шаг.</p><p class="quote">Сильная компания не делает вид, что каждый знает всё.<br /><br />Она умеет быстро находить правильного человека.</p></article>
       </div>
     </section>
 
