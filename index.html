@@ -306,8 +306,15 @@
     .culture-team-card { width: 100%; max-width: none; margin: 48px 0 0; text-align: left; }
     .culture-team-card h3 { margin-bottom: 14px; }
     .culture-caption { max-width: 850px; margin-bottom: 0; }
-    .culture-gallery { display: flex; gap: 14px; overflow-x: auto; margin-top: 26px; padding-bottom: 10px; scroll-snap-type: x mandatory; scrollbar-color: var(--blue) rgba(101,146,168,.16); }
-    .culture-gallery img { flex: 0 0 auto; width: auto; height: 350px; max-width: none; object-fit: cover; border-radius: 16px; scroll-snap-align: start; }
+    .culture-gallery-wrap { position: relative; margin-top: 26px; }
+    .culture-gallery { display: flex; gap: 14px; overflow-x: auto; margin: 0; padding: 0 48px 10px; scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab; touch-action: pan-y; user-select: none; }
+    .culture-gallery::-webkit-scrollbar { display: none; }
+    .culture-gallery.dragging { cursor: grabbing; scroll-behavior: auto; }
+    .culture-gallery img { flex: 0 0 auto; width: auto; height: 350px; max-width: none; object-fit: cover; border-radius: 16px; scroll-snap-align: start; pointer-events: none; }
+    .culture-arrow { position: absolute; top: 50%; z-index: 2; display: grid; place-items: center; width: 42px; height: 42px; color: var(--white); background: rgba(48,58,79,.82); border: 1px solid rgba(255,255,255,.3); border-radius: 50%; box-shadow: 0 8px 20px rgba(48,58,79,.2); cursor: pointer; transform: translateY(-50%); transition: .2s ease; }
+    .culture-arrow:hover { background: var(--blue); transform: translateY(-50%) scale(1.06); }
+    .culture-arrow.left { left: 8px; }
+    .culture-arrow.right { right: 8px; }
     .final-section { background: var(--ink); }
     .final-logo-bg { position: absolute; right: clamp(20px, 7vw, 110px); left: auto; top: 50%; width: min(34vw, 480px); max-height: 70%; object-fit: contain; transform: translateY(-50%); opacity: .28; filter: saturate(.78); }
     .final-section .footer-grid { position: relative; z-index: 2; grid-template-columns: minmax(0, 1.35fr) minmax(200px, .65fr); }
@@ -355,6 +362,7 @@
       .timeline, .service-grid, .team-map, .people-grid, .adaptation-grid { grid-template-columns: 1fr; }
       .person-top { display: block; }
       .person-photo { margin-bottom: 18px; }
+      .culture-gallery { padding-inline: 40px; }
       .culture-gallery img { height: 240px; }
       .service-strip { font-size: 18px; }
       .team-card p { font-size: 16px; }
@@ -568,13 +576,17 @@
       <article class="card culture-team-card">
         <h3>Команда в работе и в жизни</h3>
         <p class="muted culture-caption">Совместные встречи, корпоративные события и уважение к вкладу каждого создают рабочую среду, в которой людям хочется оставаться.</p>
-        <div class="culture-gallery">
-          <img src="assets/team-01.webp" alt="Команда на рабочей встрече" />
-          <img src="assets/team-02.webp" alt="Команда на корпоративном мероприятии" />
-          <img src="assets/team-03.webp" alt="Команда на встрече" />
-          <img src="assets/team-04.webp" alt="Команда на награждении" />
-          <img src="assets/team-05.webp" alt="Команда на общем мероприятии" />
-          <img src="assets/team-06.webp" alt="Команда на корпоративном вечере" />
+        <div class="culture-gallery-wrap">
+          <button class="culture-arrow left" type="button" aria-label="Предыдущая фотография">←</button>
+          <div class="culture-gallery" id="team-gallery">
+            <img src="assets/team-01.webp" alt="Команда на рабочей встрече" />
+            <img src="assets/team-02.webp" alt="Команда на корпоративном мероприятии" />
+            <img src="assets/team-03.webp" alt="Команда на встрече" />
+            <img src="assets/team-04.webp" alt="Команда на награждении" />
+            <img src="assets/team-05.webp" alt="Команда на общем мероприятии" />
+            <img src="assets/team-06.webp" alt="Команда на корпоративном вечере" />
+          </div>
+          <button class="culture-arrow right" type="button" aria-label="Следующая фотография">→</button>
         </div>
       </article>
     </section>
@@ -712,6 +724,44 @@
       checks.forEach(x => x.closest('.check').classList.toggle('done', x.checked));
     }
     checks.forEach(x => x.addEventListener('change', updateProgress));
+
+    const gallery = document.getElementById('team-gallery');
+    const galleryPrev = document.querySelector('.culture-arrow.left');
+    const galleryNext = document.querySelector('.culture-arrow.right');
+    if (gallery && galleryPrev && galleryNext) {
+      const moveGallery = direction => {
+        gallery.scrollBy({ left: direction * Math.min(gallery.clientWidth * .78, 620), behavior: 'smooth' });
+      };
+      galleryPrev.addEventListener('click', () => moveGallery(-1));
+      galleryNext.addEventListener('click', () => moveGallery(1));
+
+      let dragging = false;
+      let dragStartX = 0;
+      let startScrollLeft = 0;
+
+      gallery.addEventListener('pointerdown', event => {
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
+        dragging = true;
+        dragStartX = event.clientX;
+        startScrollLeft = gallery.scrollLeft;
+        gallery.classList.add('dragging');
+        gallery.setPointerCapture(event.pointerId);
+      });
+      gallery.addEventListener('pointermove', event => {
+        if (!dragging) return;
+        gallery.scrollLeft = startScrollLeft - (event.clientX - dragStartX);
+      });
+      const stopDragging = event => {
+        if (!dragging) return;
+        dragging = false;
+        gallery.classList.remove('dragging');
+        if (event.pointerId !== undefined && gallery.hasPointerCapture(event.pointerId)) {
+          gallery.releasePointerCapture(event.pointerId);
+        }
+      };
+      gallery.addEventListener('pointerup', stopDragging);
+      gallery.addEventListener('pointercancel', stopDragging);
+    }
 
     const navLinks = [...document.querySelectorAll('.topnav a')];
     const sections = [...document.querySelectorAll('[data-section]')];
